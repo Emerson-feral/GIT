@@ -1,7 +1,17 @@
+const fileStatus = require("./fileStatus");
+const fileDetection = require("./fileDetection");
 const args = process.argv.slice(2);
 
-if (args[0] === "add") {
-  // Make the GIT add
-} else {
-  console.log("Unknow command");
+switch (args[0]) {
+  case "add":
+    //ADD FILE
+    break;
+  case "status":
+  // fileDetection();
+  // fileStatus.unstagedStatus();
+  // process.exit(0);
+
+  default:
+    console.log("Unknow command");
+    break;
 }
