@@ -1,25 +1,39 @@
 const fs = require("fs");
 const path = require("path");
-const fileStatus = require("./fileStatus");
+const { newFileStatus } = require("./fileStatus");
 
-function fileDetection() {
-  const folder = "./";
+const folder = "./";
+const folderStateFile = "lastState.json";
 
-  fs.watch(folder, (event, file) => {
-    if (event === "rename") {
-      const fullPath = path.join(folder, file);
-
-      fs.stat(fullPath, (err, stats) => {
-        if (!err && stats.isFile()) {
-          console.log("New file detected: ", file);
-        } else {
-          console.log("File removed: ", file);
-        }
-
-        fileStatus(file);
-      });
-    }
+function fileDetection(dir) {
+  return fs.readdirSync(dir).filter((file) => {
+    return fs.statSync(path.join(dir, file)).isFile();
   });
 }
+
+function compareStates(oldFiles, newFiles) {
+  const created = newFiles.filter((f) => !oldFiles.includes(f));
+  const deleted = oldFiles.filter((f) => !newFiles.includes(f));
+
+  return { created, deleted };
+}
+
+function main() {
+  let oldFiles = [];
+
+  if (fs.existsSync(folderStateFile)) {
+    oldFiles = JSON.parse(fs.readFileSync(folderStateFile, "utf-8"));
+  }
+
+  const newFiles = fileDetection(folder);
+  const { created, deleted } = compareStates(oldFiles, newFiles);
+
+  if (created.length) console.log("New file detected: ", created);
+  if (deleted.length) console.log("File removed: ", deleted);
+
+  fs.writeFileSync(folderStateFile, JSON.stringify(newFiles, null, 2));
+}
+
+main();
 
 module.exports = fileDetection;
