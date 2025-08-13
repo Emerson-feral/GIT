@@ -1,8 +1,12 @@
-function fileStatus(file) {
-  const staged = new Set();
-  const unstaged = new Set();
+const staged = new Set();
+const unstaged = new Set();
 
+function newFileStatus(file) {
   unstaged.add(file);
 }
 
-module.exports = fileStatus;
+function unstagedStatus() {
+  console.log(unstaged);
+}
+
+module.exports = { newFileStatus, unstagedStatus };
