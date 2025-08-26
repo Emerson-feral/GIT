@@ -1,12 +1,12 @@
-const staged = new Set();
-const unstaged = new Set();
+const fs = require("fs");
+const path = require("path");
 
 function newFileStatus(file) {
-  unstaged.add(file);
+  // Add files to stagedFiles
 }
 
-function unstagedStatus() {
-  console.log(unstaged);
+function status() {
+  // Show status
 }
 
-module.exports = { newFileStatus, unstagedStatus };
+module.exports = { newFileStatus, status };
