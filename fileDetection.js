@@ -1,6 +1,5 @@
 const fs = require("fs");
 const path = require("path");
-const { newFileStatus } = require("./fileStatus");
 
 const folder = "./";
 const folderStateFile = "lastState.json";
@@ -30,10 +29,6 @@ function main() {
 
   if (created.length) console.log("New file detected: ", created);
   if (deleted.length) console.log("File removed: ", deleted);
-
-  fs.writeFileSync(folderStateFile, JSON.stringify(newFiles, null, 2));
 }
 
-main();
-
-module.exports = fileDetection;
+module.exports = { main };
