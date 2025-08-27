@@ -29,6 +29,8 @@ function main() {
 
   if (created.length) console.log("New file detected: ", created);
   if (deleted.length) console.log("File removed: ", deleted);
+
+  return { newFiles };
 }
 
 module.exports = { main };
