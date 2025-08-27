@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const folder = "./";
+const folder = "./src";
 const folderStateFile = "lastState.json";
 
 function fileDetection(dir) {
