@@ -4,17 +4,17 @@ const args = process.argv.slice(2);
 
 switch (args[0]) {
   case "init":
-    //SETUP
     fileInitiation();
-    fileDetection.main();
+    break;
   case "add":
-    //ADD FILE
-    fileStatus.newFileStatus(args[1]);
+    fileStatus.addFileToStage(args[1]);
+    break;
+  case "restore":
+    fileStatus.removeStagedFile(args[1]);
     break;
   case "status":
     fileStatus.status();
-  // process.exit(0);
-
+    break;
   default:
     console.log("Unknow command");
     break;
