@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const fileStatus = require("./fileStatus");
 
 const folder = "./src";
 const folderStateFile = "lastState.json";
@@ -27,8 +28,15 @@ function main() {
   const newFiles = fileDetection(folder);
   const { created, deleted } = compareStates(oldFiles, newFiles);
 
-  if (created.length) console.log("New file detected: ", created);
-  if (deleted.length) console.log("File removed: ", deleted);
+  if (created.length) {
+    console.log("New file detected: ", created);
+    fileStatus.addFileToUntracked(created[0]);
+  }
+
+  if (deleted.length) {
+    console.log("File removed: ", deleted);
+    fileStatus.removeUntrackedFile(deleted[0]);
+  }
 
   return { newFiles };
 }
