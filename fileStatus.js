@@ -64,4 +64,10 @@ function removeStagedFile(file) {
   addFileToUntracked(file);
 }
 
-module.exports = { addFileToStage, removeStagedFile, status };
+module.exports = {
+  addFileToStage,
+  addFileToUntracked,
+  removeStagedFile,
+  removeUntrackedFile,
+  status,
+};
