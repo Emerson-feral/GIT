@@ -28,17 +28,7 @@ function main() {
   const newFiles = fileDetection(folder);
   const { created, deleted } = compareStates(oldFiles, newFiles);
 
-  if (created.length) {
-    console.log("New file detected: ", created);
-    fileStatus.addFileToUntracked(created[0]);
-  }
-
-  if (deleted.length) {
-    console.log("File removed: ", deleted);
-    fileStatus.removeUntrackedFile(deleted[0]);
-  }
-
-  return { newFiles };
+  return { created, deleted, newFiles };
 }
 
 module.exports = { main };
