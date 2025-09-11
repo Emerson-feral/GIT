@@ -13,7 +13,7 @@ switch (args[0]) {
     fileStatus.removeStagedFile(args[1]);
     break;
   case "status":
-    fileStatus.status();
+    const { created, deleted, newFiles } = fileDetection.main();
     break;
   default:
     console.log("Unknow command");
