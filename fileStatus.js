@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const fileDetection = require("./fileDetection");
 const lastState = require("./lastState.json");
 const stagedFiles = require("./stagedFiles.json");
 
@@ -29,11 +30,6 @@ function addFileToUntracked(file) {
     path.join(rootPath, lastStatePath),
     JSON.stringify(arrayData, null, 2)
   );
-}
-
-function status() {
-  console.log("Untracked files: ", lastState);
-  console.log("Staged files: ", stagedFiles);
 }
 
 function removeUntrackedFile(file) {
@@ -69,5 +65,4 @@ module.exports = {
   addFileToUntracked,
   removeStagedFile,
   removeUntrackedFile,
-  status,
 };
